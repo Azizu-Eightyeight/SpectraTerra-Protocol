@@ -1,1 +1,0 @@
-# SpectraTerra-Protocol
