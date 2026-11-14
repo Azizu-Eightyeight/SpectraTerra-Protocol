@@ -3,72 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpectraTerra Protocol</title>
+    <title>SpectraTerra Protocol | NASA Mission Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-space: #030712;
+            --panel-bg: rgba(15, 23, 42, 0.78);
+            --border-glow: rgba(56, 189, 248, 0.35);
+            --cyan: #38bdf8;
+            --magenta: #f472b6;
+            --green: #4ade80;
+            --amber: #fbbf24;
+            --red: #f87171;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            background-color: #0b0f19;
+            background-color: var(--bg-space);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(244, 114, 182, 0.12) 0%, transparent 40%),
+                radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #38bdf8, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 160px 120px, rgba(255,255,255,0.7), rgba(0,0,0,0));
+            background-size: 100% 100%, 100% 100%, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px;
             color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             margin: 0;
             padding: 20px;
+            min-height: 100vh;
         }
+
+        /* Üst NASA Görev Başlığı */
         header {
-            text-align: center;
-            border-bottom: 2px solid #1e293b;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        h1 { color: #38bdf8; margin: 0; }
-        .container {
+            max-width: 1280px;
+            margin: 0 auto 25px auto;
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 18px 28px;
             display: flex;
-            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nasa-badge {
+            background: linear-gradient(135deg, #0284c7, #1d4ed8);
+            border: 2px solid #7dd3fc;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: white;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            margin: 0;
+            font-size: 1.6rem;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .subtitle {
+            color: var(--cyan);
+            margin: 2px 0 0 0;
+            font-size: 0.95rem;
+            letter-spacing: 0.8px;
+        }
+
+        .telemetry-bar {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+        }
+
+        .status-pill {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        /* Ana Modül Konteyneri */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 24px;
+        }
+
+        .module {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .mod-a-title { color: var(--cyan); }
+        .mod-b-title { color: var(--magenta); }
+
+        .tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .tag-observed { background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid var(--cyan); }
+        .tag-simulated { background: rgba(244, 114, 182, 0.15); color: var(--magenta); border: 1px solid var(--magenta); }
+        .tag-estimated { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid var(--amber); }
+
+        /* Modül A: Radar ve Spektrum Görselleştirmesi */
+        .radar-viewport {
+            position: relative;
+            height: 170px;
+            background: radial-gradient(circle at center, #0c192c 0%, #020617 100%);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
-        .module {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 20px;
-            width: 45%;
-            min-height: 300px;
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+            background-size: 25px 25px;
         }
-        h2 { color: #f472b6; font-size: 1.2rem; }
-        button {
-            background-color: #0284c7;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, var(--cyan), transparent);
+            box-shadow: 0 0 15px var(--cyan);
+            left: 10%;
+            animation: sweep 3.5s linear infinite;
         }
-        button:hover { background-color: #0369a1; }
-    </style>
-</head>
-<body>
 
-    <header>
-        <h1>SpectraTerra Protocol</h1>
-        <p>NASA SPHEREx Infrared Exploration & Terraform Simulation Lab</p>
-    </header>
+        @keyframes sweep {
+            0% { left: 0%; }
+            50% { left: 99%; }
+            100% { left: 0%; }
+        }
 
-    <div class="container">
-        <!-- Modül A: SpectraScan -->
-        <div class="module">
-            <h2>Modül A: SpectraScan (Blink Comparator)</h2>
-            <p>Status: Ready to scan NASA infrared sky data...</p>
-            <button onclick="alert('Scanning SPHEREx sky grid... Exoplanet candidate detected!')">Run Sky Scan</button>
-        </div>
+        .spectrum-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 90px;
+            z-index: 2;
+        }
 
-        <!-- Modül B: TerraProtocol -->
-        <div class="module">
-            <h2>Modül B: TerraProtocol (Climate Lab)</h2>
-            <p>Status: No target loaded.</p>
-            <label>Atmospheric Thickness:</label><br>
-            <input type="range" min="0" max="100" value="50"><br><br>
-            <button onclick="alert('Simulating planetary surface temperature...')">Run Terraform Simulation</button>
-        </div>
-    </div>
+        .bar {
+            width: 10px;
+            background: linear-gradient(to top, #0284c7, #38bdf8);
+            border-radius: 3px 3px 0 0;
+            transition: height 0.5s ease;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+        }
 
-</body>
-</html>
+        /* Modül B: Dinamik Gezegen Küresi */
+        .planet-stage {
+            height: 170px;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .planet-sphere {
+            width: 120px;
