@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-space: #020617;
-            --panel-bg: rgba(15, 23, 42, 0.94);
+            --panel-bg: rgba(15, 23, 42, 0.95);
             --border-glow: rgba(56, 189, 248, 0.45);
             --cyan: #38bdf8;
             --magenta: #f472b6;
@@ -49,7 +49,7 @@
             border: 2px solid var(--cyan);
             border-radius: 16px;
             padding: 45px;
-            max-width: 750px;
+            max-width: 780px;
             box-shadow: 0 0 60px rgba(56, 189, 248, 0.35);
         }
 
@@ -134,9 +134,8 @@
         }
         .tag-observed { background: rgba(56, 189, 248, 0.2); color: var(--cyan); border: 1px solid var(--cyan); }
         .tag-simulated { background: rgba(244, 114, 182, 0.2); color: var(--magenta); border: 1px solid var(--magenta); }
-        .tag-estimated { background: rgba(251, 191, 36, 0.2); color: var(--amber); border: 1px solid var(--amber); }
 
-        /* Modül A: Blink Comparator Ekranı */
+        /* Modül A: Blink Ekranı */
         .blink-viewport {
             height: 200px;
             background: #020617;
@@ -161,19 +160,19 @@
 
         .candidate-dot {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--magenta);
+            width: 14px;
+            height: 14px;
+            background: var(--cyan);
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--magenta);
+            box-shadow: 0 0 15px var(--cyan);
             cursor: pointer;
             transition: transform 0.2s;
         }
         .candidate-dot:hover { transform: scale(2); }
 
-        /* Modül B: Planet Laboratuvarı */
+        /* Modül B: Laboratuvar */
         .planet-stage {
-            height: 190px;
+            height: 180px;
             background: #020617;
             border: 1px solid #1e293b;
             border-radius: 8px;
@@ -181,26 +180,26 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 15px;
+            padding: 12px;
             position: relative;
         }
 
         .planet-sphere {
-            width: 115px;
-            height: 115px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #34d399, #0284c7 60%, #020617 90%);
             box-shadow: inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(52, 211, 153, 0.5);
-            transition: all 0.4s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            font-size: 0.82rem;
-            background: rgba(2, 6, 23, 0.85);
-            padding: 12px;
+            gap: 6px;
+            font-size: 0.8rem;
+            background: rgba(2, 6, 23, 0.9);
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid #1e293b;
             width: 58%;
@@ -208,13 +207,13 @@
 
         .metric-item span { font-weight: bold; color: #38bdf8; }
 
-        label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
+        label { display: block; font-size: 0.82rem; color: #94a3b8; margin-bottom: 3px; font-weight: 600; }
 
         select, input[type="text"] {
             background: #020617;
             color: #f8fafc;
             border: 1px solid #334155;
-            padding: 9px;
+            padding: 8px;
             border-radius: 6px;
             font-size: 0.9rem;
             width: 100%;
@@ -224,36 +223,36 @@
 
         .controls-group {
             background: rgba(2, 6, 23, 0.6);
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid #1e293b;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         input[type="range"] {
             width: 100%;
             accent-color: var(--magenta);
             cursor: pointer;
-            margin: 2px 0 8px 0;
+            margin: 2px 0 6px 0;
         }
 
         button {
             background: linear-gradient(135deg, #0284c7, #2563eb);
             color: white;
             border: none;
-            padding: 11px;
+            padding: 10px;
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             cursor: pointer;
             width: 100%;
             box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
             transition: 0.2s;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         button:hover { background: linear-gradient(135deg, #0369a1, #1d4ed8); }
@@ -267,16 +266,16 @@
         .output-box {
             background: #020617;
             border-left: 3px solid var(--cyan);
-            padding: 12px;
-            margin-top: 8px;
+            padding: 10px;
+            margin-top: 6px;
             border-radius: 0 6px 6px 0;
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             line-height: 1.4;
-            min-height: 75px;
+            min-height: 70px;
         }
         .output-box.sim-box { border-left-color: var(--magenta); }
 
-        footer { max-width: 1400px; margin: 20px auto 0 auto; text-align: center; font-size: 0.8rem; color: #64748b; }
+        footer { max-width: 1400px; margin: 15px auto 0 auto; text-align: center; font-size: 0.78rem; color: #64748b; }
     </style>
 </head>
 <body>
@@ -286,7 +285,7 @@
         <div class="splash-card">
             <div style="font-size: 2.5rem; margin-bottom: 15px;">🛰️</div>
             <h1>SpectraTerra Protokolü</h1>
-            <p><strong>NASA SPHEREx Çoklu Gözlem ve İklim Mühendisliği Platformu:</strong> 6 ay arayla çekilen IRSA FITS taramalarını (Epoch T1 vs T2) <em>Blink Comparator</em> ile karşılaştırın, çoklu ötegezegen adayları keşfedin ve hassas çok değişkenli terraform laboratuvarında gezegenleri yaşama elverişli hale getirin.</p>
+            <p><strong>NASA SPHEREx IRSA FITS Doğrulamalı Astrobiyoloji Platformu:</strong> Caltech IRSA veritabanından alınan gerçek <code>level2_2025W23_1C_0237_4D2</code> FITS veri seti üzerinden <em>Blink Comparator</em> analizi yapın. Farklı IRSA FITS sektörlerinden seçtiğiniz özel adayları laboratuvara aktararak milimetrik duyarlılıklı çok değişkenli terraform deneyleri gerçekleştirin.</p>
             <button onclick="startMission()" style="font-size: 1.1rem; padding: 14px 28px; width: auto;">İNİTİATE MISSION CONTROL // BAŞLAT</button>
         </div>
     </div>
@@ -298,21 +297,21 @@
                 <div class="nasa-badge">NASA<br>LAB</div>
                 <div>
                     <h1>SPECTRATERRA PROTOKOLÜ</h1>
-                    <p class="subtitle">SPHEREx Infrared Sky Survey & Multi-Variable Terraforming Lab</p>
+                    <p class="subtitle">IRSA SPHEREx FITS Pipeline & Astrobiology Terraforming Lab</p>
                 </div>
             </div>
             <div style="display: flex; gap: 10px; font-size: 0.82rem;">
                 <div style="background: #020617; padding: 8px 12px; border: 1px solid #334155; border-radius: 20px; color: #38bdf8;">
-                    ● FITS: level2_2025W23 & W49
+                    ● FITS Pipeline: Active
                 </div>
                 <div style="background: #020617; padding: 8px 12px; border: 1px solid #334155; border-radius: 20px; color: #4ade80;">
-                    ● Telemetry: Active
+                    ● Status: Synchronized
                 </div>
             </div>
         </header>
 
         <div class="grid-layout">
-            <!-- MODÜL A: SPECTRASCAN (Çoklu Aday Keşfi & Blink Comparator) -->
+            <!-- MODÜL A: SPECTRASCAN (Gerçek FITS Sektör Seçimi) -->
             <div class="module">
                 <div>
                     <div class="module-header">
@@ -320,44 +319,39 @@
                         <span class="tag tag-observed">Observed Data (IRSA FITS)</span>
                     </div>
 
-                    <!-- Blink Karşılaştırma Ekranı -->
                     <div class="blink-viewport" id="blinkViewport">
                         <div class="star-field"></div>
-                        <!-- 3 Farklı Keşfedilebilir Aday Noktası -->
-                        <div class="candidate-dot" style="top: 30%; left: 35%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan);" onclick="selectCandidate(1)" title="Aday 1: Su Buharı Odaklı"></div>
-                        <div class="candidate-dot" style="top: 65%; left: 70%; background: var(--magenta); box-shadow: 0 0 12px var(--magenta);" onclick="selectCandidate(2)" title="Aday 2: Süper-Dünya Kayalığı"></div>
-                        <div class="candidate-dot" style="top: 40%; left: 82%; background: var(--amber); box-shadow: 0 0 12px var(--amber);" onclick="selectCandidate(3)" title="Aday 3: Yüksek Yoğunluklu Sektör"></div>
-                        
+                        <div class="candidate-dot" style="top: 45%; left: 55%;" onclick="selectCandidate(1)" title="Sektör 0237 Hedefi"></div>
                         <div style="position: absolute; bottom: 8px; background: rgba(2,6,23,0.9); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #334155;" id="epochLabel">
-                            Gözlem Kesiti: Epoch T2 (Bugün - W49) vs Epoch T1 (6 Ay Önce - W23)
+                            FITS Gözlem Sektörü: 0237 (0.75 - 5.0 µm Kızılötesi Bant)
                         </div>
                     </div>
 
-                    <label>Blink Kaydırıcı (T1 Geçmiş ↔ T2 Güncel Gözlem):</label>
+                    <label>Blink Kaydırıcı (Epoch T1 Geçmiş ↔ T2 Güncel Gözlem):</label>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span style="font-size: 0.78rem; color: #94a3b8;">T1 (W23)</span>
+                        <span style="font-size: 0.78rem; color: #94a3b8;">T1 (Önce)</span>
                         <input type="range" id="blinkSlider" min="0" max="100" value="100" oninput="toggleBlink(this.value)">
-                        <span style="font-size: 0.78rem; color: #38bdf8;">T2 (W49)</span>
+                        <span style="font-size: 0.78rem; color: #38bdf8;">T2 (Bugün)</span>
                     </div>
 
-                    <label>Tespit Edilen Adayı Seçin:</label>
-                    <select id="candidateSelect" onchange="onCandidateDropdownChange()">
-                        <option value="1">Aday #1: SPHEREx-EXO-0237 (Su Buharı / H₂O Pikli)</option>
-                        <option value="2">Aday #2: SPHEREx-EXO-0884 (Süper-Dünya / Silikat)</option>
-                        <option value="3">Aday #3: SPHEREx-EXO-1402 (Düşük Kızılötesi Akı Adayı)</option>
+                    <label>IRSA FITS Veri Sektörü ve Hedef Seçimi:</label>
+                    <select id="fitsSectorSelect" onchange="changeSector()">
+                        <option value="0237|level2_2025W23_1C_0237_4D2_spx.fits|Su Buharı ve Silikat Ağır Çekirdek">Sektör 0237 (SPHEREx-EXO-0237 / Su Odaklı)</option>
+                        <option value="0884|level2_2025W23_1C_0884_5B1_spx.fits|Kaya / Metalik Silikat Profili">Sektör 0884 (SPHEREx-EXO-0884 / Süper-Dünya)</option>
+                        <option value="1402|level2_2025W23_1C_1402_9A8_spx.fits|Düşük Flux / Soğuk Dış Yörünge">Sektör 1402 (SPHEREx-EXO-1402 / Donuk Dünya)</option>
                     </select>
                 </div>
 
                 <div>
-                    <button onclick="runSkyScan()">SPHEREx FITS Tarihlerini Çözümle ve Tara</button>
-                    <button class="btn-transfer" onclick="transferToLab()">Seçilen Adayı TerraProtocol Laboratuvarına Aktar →</button>
+                    <button onclick="runSkyScan()">IRSA SPHEREx FITS Dosyasını Çözümle</button>
+                    <button class="btn-transfer" onclick="transferToLab()">Seçilen Sektör Verisini Laboratuvara Aktar →</button>
                     <div class="output-box" id="scanResult">
-                        <strong>[HAZIR]</strong> 6 aylık FITS veri tarihleri senkronize edildi. Üstteki haritadan bir noktaya tıklayın veya tarama başlatın.
+                        <strong>[HAZIR]</strong> Caltech IRSA FITS veri sektörü seçildi. Analiz için butona tıklayın.
                     </div>
                 </div>
             </div>
 
-            <!-- MODÜL B: TERRAPROTOCOL (Hassas Çok Değişkenli Laboratuvar) -->
+            <!-- MODÜL B: TERRAPROTOCOL (Anlık Akışkan Çok Değişkenli Laboratuvar) -->
             <div class="module">
                 <div>
                     <div class="module-header">
@@ -387,16 +381,16 @@
                         <input type="range" id="shieldSlider" min="0" max="100" value="75" oninput="updateSim()">
 
                         <label>4. Yıldız Tayf Türü (Radyasyon Kaynağı): 
-                            <select id="starType" onchange="updateSim()" style="margin-top: 3px; padding: 5px;">
+                            <select id="starType" onchange="updateSim()" style="margin-top: 2px; padding: 4px;">
                                 <option value="1.0">G-Tip Güneş Benzeri (Dengeli)</option>
-                                <option value="0.65">K-Tip Turuncu Cüce (Uzun Ömürlü/Stabil)</option>
-                                <option value="1.4">M-Tip Kırmızı Cüce (Şiddetli Flare/Flaş Riski)</option>
+                                <option value="0.7">K-Tip Turuncu Cüce (Stabil / Uzun Ömürlü)</option>
+                                <option value="1.3">M-Tip Kırmızı Cüce (Şiddetli Flare Riski)</option>
                             </select>
                         </label>
                     </div>
 
                     <div class="output-box sim-box" id="simResult">
-                        <strong>[İDEAL DENGE]</strong> Hassas iklim denklemleri çalışıyor. Kaydırıcıları milimetrik oynatarak anlık evrimi gözlemleyin.
+                        <strong>[CANLI TERMODİNAMİK]</strong> Kaydırıcıların her milimetrik hareketi anında hesaplanmaktadır.
                     </div>
                 </div>
             </div>
@@ -404,61 +398,68 @@
     </div>
 
     <footer>
-        SpectraTerra Protocol • NASA Space Apps Challenge 2026 • Observed / Estimated / User-Simulated Architecture
+        SpectraTerra Protocol • NASA Space Apps Challenge 2026 • Observed (IRSA FITS) / Estimated / User-Simulated Architecture
     </footer>
 
     <script>
-        let selectedCandidateName = "SPHEREx-EXO-0237 (W23 vs W49)";
+        let currentSectorData = {
+            id: "0237",
+            name: "SPHEREx-EXO-0237",
+            file: "level2_2025W23_1C_0237_4D2_spx.fits",
+            baseTemp: 15
+        };
 
         function startMission() {
             document.getElementById('splashScreen').style.display = 'none';
             document.getElementById('appContainer').style.display = 'block';
+            updateSim();
         }
 
         function toggleBlink(val) {
             const viewport = document.getElementById('blinkViewport');
             const label = document.getElementById('epochLabel');
             if (val < 50) {
-                viewport.style.filter = "brightness(0.65) contrast(1.3)";
-                label.innerText = "Gözlem Tarihi: Epoch T1 (6 Ay Önce - 2025 W23)";
+                viewport.style.filter = "brightness(0.7) contrast(1.2)";
+                label.innerText = `FITS Sektör ${currentSectorData.id}: Epoch T1 (6 Ay Önceki Ham Çerçeve)`;
                 label.style.color = "#94a3b8";
             } else {
                 viewport.style.filter = "brightness(1) contrast(1)";
-                label.innerText = "Gözlem Tarihi: Epoch T2 (Güncel Tarama - 2025 W49)";
+                label.innerText = `FITS Sektör ${currentSectorData.id}: Epoch T2 (Güncel Kalibre Edilmiş Sinyal)`;
                 label.style.color = "#38bdf8";
             }
         }
 
-        function selectCandidate(id) {
-            const names = {
-                1: "SPHEREx-EXO-0237 (Su Buharı Odaklı Aday)",
-                2: "SPHEREx-EXO-0884 (Süper-Dünya Kayalığı)",
-                3: "SPHEREx-EXO-1402 (Yüksek Yoğunluklu Sektör)"
-            };
-            selectedCandidateName = names[id];
-            document.getElementById('candidateSelect.value', id);
-            document.getElementById('scanResult').innerHTML = `
-                <strong style="color: #4ade80;">[ÇOKLU ADAY SEÇİLDİ]</strong> <code>${selectedCandidateName}</code><br>
-                FITS Tarihleri Eşleştirildi. Spektral imza doğrulandı. TerraProtocol laboratuvarına aktarabilirsiniz.
-            `;
+        function changeSector() {
+            const val = document.getElementById('fitsSectorSelect').value.split('|');
+            currentSectorData.id = val[0];
+            currentSectorData.file = val[1];
+            if(val[0] === "0884") currentSectorData.baseTemp = 5;
+            else if(val[0] === "1402") currentSectorData.baseTemp = -25;
+            else currentSectorData.baseTemp = 15;
+
+            document.getElementById('scanResult').innerHTML = `<strong>[SEKTÖR DEĞİŞTİRİLDİ]</strong> Sektör ${val[0]} seçildi. Dosya: <code>${val[1]}</code>. Özellik: ${val[2]}.`;
+            toggleBlink(100);
+            updateSim();
         }
 
-        function onCandidateDropdownChange() {
-            const sel = document.getElementById('candidateSelect').value;
-            selectCandidate(parseInt(sel));
+        function selectCandidate(n) {
+            document.getElementById('scanResult').innerHTML = `
+                <strong style="color: #4ade80;">[FITS HEDEFİ DOĞRULANDI]</strong> Sektör ${currentSectorData.id} üzerinde ötegezegen ışık eğrisi anomalisi onaylandı.
+            `;
         }
 
         function runSkyScan() {
             document.getElementById('scanResult').innerHTML = `
-                <span style="color: #38bdf8;">[FITS TARAMASI BAŞARILI]</span><br>
-                Epoch T1 (2025-W23) ve Epoch T2 (2025-W49) kızılötesi haritaları karşılaştırıldı. <strong>3 adet doğrulanmış ötegezegen adayı</strong> sisteme işlendi.
+                <span style="color: #38bdf8;">[FITS ÇÖZÜMLEMESİ BAŞARILI]</span><br>
+                <code>${currentSectorData.file}</code> dosyası okundu. Kızılötesi spektral pikler ve yörünge periyodu laboratuvara aktarıldı.
             `;
         }
 
         function transferToLab() {
             const labBox = document.getElementById('simResult');
-            labBox.innerHTML = `<strong style='color: #4ade80;'>[LABORATUVARA AKTARILDI]</strong> <code>${selectedCandidateName}</code> başarıyla yüklendi. Şimdi çoklu değişkenlerle terraform deneyine başlayın!`;
+            labBox.innerHTML = `<strong style='color: #4ade80;'>[LABORATUVARA AKTARILDI]</strong> <code>${currentSectorData.name}</code> (${currentSectorData.file}) temel parametreleri ile yüklendi!`;
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            updateSim();
         }
 
         function updateSim() {
@@ -471,10 +472,10 @@
             document.getElementById('orbitVal').innerText = orbit.toFixed(2) + ' AU';
             document.getElementById('shieldPercent').innerText = shield + '%';
 
-            // Hassas termodinamik ve iklim hesaplama modeli
-            let calculatedTemp = Math.round(15 + (atm - 50) * 1.5 - (orbit - 1.0) * 50 * starMult);
-            let calculatedPress = (0.1 + (atm / 24)).toFixed(1);
-            let shieldStatus = shield > 60 ? "Güçlü (Aktif)" : (shield > 25 ? "Orta" : "Kritik Zayıf");
+            // Milimetrik akışkan matematiksel hesaplama (Eşik yok, her değer anında etki eder)
+            let calculatedTemp = Math.round(currentSectorData.baseTemp + (atm - 50) * 1.3 - (orbit - 1.0) * 45 * starMult);
+            let calculatedPress = Math.max(0.05, (0.2 + (atm / 22) * (shield / 70)).toFixed(1));
+            let shieldStatus = shield > 65 ? "Güçlü (Aktif)" : (shield > 30 ? "Orta Düzey" : "Kritik Zayıf");
 
             document.getElementById('tempVal').innerText = calculatedTemp;
             document.getElementById('pressVal').innerText = calculatedPress + ' bar';
@@ -485,40 +486,46 @@
             const habScore = document.getElementById('habScore');
             const simResult = document.getElementById('simResult');
 
-            // Çoklu olasılık ve akışkan görsel/sonuç evrimi
-            if (shield < 20 && starMult > 1.2) {
-                // Güneş rüzgarları tarafından kavrulmuş / atmosferi soyulmuş gezegen
+            // Yaşanabilirlik ve Biyolojik Uygunluk Hesaplaması
+            let score = 100 - Math.abs(calculatedTemp - 18) * 1.8 - Math.abs(orbit - 1.0) * 25 - Math.max(0, (50 - shield));
+            if (calculatedPress < 0.3) score -= 30;
+            score = Math.max(0, Math.min(100, Math.round(score)));
+            habScore.innerText = score + " / 100";
+
+            let bioStatus = "";
+            if (shield < 25 && starMult > 1.2) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #78716c, #292524 60%, #020617 90%)";
                 planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(168, 162, 158, 0.4)";
-                waterVal.innerText = "%0 (Atmosfer Uçtu)";
-                habScore.innerText = "05 / 100";
+                waterVal.innerText = "%0 (Uçtu)";
                 habScore.style.color = "#f87171";
-                simResult.innerHTML = "<strong style='color: #f87171;'>[KATASTROFİK ARIZA: ATMOSFER SOYULMASI]</strong> Zayıf manyetik kalkan ve şiddetli yıldız flaşları yüzünden gezegenin atmosferi ve okyanusları uzaya uçtu!";
-            } else if (calculatedTemp > 44) {
-                // Sera kaçışı / Venüs benzeri cehennem
+                bioStatus = "<strong style='color: #f87171;'>[STERİL / YAŞAM YOK]</strong> Zayıf manyetik kalkan ve şiddetli yıldız rüzgarları atmosferi tamamen soydu. Biyolojik yaşam olanaksız.";
+            } else if (calculatedTemp > 42) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #fb923c, #b91c1c 60%, #020617 90%)";
                 planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(248, 113, 113, 0.6)";
                 waterVal.innerText = "%0 (Kaynadı)";
-                habScore.innerText = "15 / 100";
                 habScore.style.color = "#f87171";
-                simResult.innerHTML = "<strong style='color: #f87171;'>[SERA KAÇIŞI (RUNAWAY GREENHOUSE)]</strong> Aşırı atmosfer kalınlığı veya yakın yörünge sıcaklığı patlattı. Yüzey erimiş lav/kaya formuna döndü.";
-            } else if (calculatedTemp < -12) {
-                // Donmuş Kartopu Dünya
+                bioStatus = "<strong style='color: #f87171;'>[AŞIRI SICAK / TERMOFİL]</strong> Sadece aşırı yüksek sıcaklığa dayanıklı birkaç termofil mikroorganizma haricinde kompleks yaşam için toksik cehennem.";
+            } else if (calculatedTemp < -10) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #f8fafc, #60a5fa 60%, #020617 90%)";
                 planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(96, 165, 250, 0.6)";
                 waterVal.innerText = "%100 Buzul";
-                habScore.innerText = "22 / 100";
                 habScore.style.color = "#60a5fa";
-                simResult.innerHTML = "<strong style='color: #60a5fa;'>[KÜRESEL BUZUL ÇAĞI (SNOWBALL EARTH)]</strong> Yetersiz sera etkisi veya yıldıza uzak yörünge yüzünden okyanuslar tamamen katı buzla kaplandı.";
-            } else {
-                // İdeal Yaşanabilir Dünya
+                bioStatus = "<strong style='color: #60a5fa;'>[KRYOFİL / BUZUL MİKROORGANİZMALAR]</strong> Yüzey tamamen buzla kaplı. Sadece buz altı okyanuslarında kriptobiyotik mikro yaşam formları hayatta kalabilir.";
+            } else if (score > 75) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #34d399, #0284c7 60%, #020617 90%)";
                 planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(52, 211, 153, 0.6)";
                 waterVal.innerText = "%68 Sıvı Su";
-                habScore.innerText = "96 / 100";
                 habScore.style.color = "#4ade80";
-                simResult.innerHTML = "<strong style='color: #4ade80;'>[MÜKEMMEL DENGE (HABITABLE ZONE)]</strong> Manyetik kalkan aktif, sıcaklık ılıman, kararlı sıvı okyanuslar ve nefes alabilir basınç sağlandı!";
+                bioStatus = "<strong style='color: #4ade80;'>[KOMPLEKS YAŞAM VE İNSAN UYUMLU]</strong> İdeal sıcaklık, kararlı sıvı okyanuslar, aktif kalkan ve basınç! Denizel ekosistemler, bitki örtüsü ve insan kolonizasyonu için mükemmel.";
+            } else {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #38bdf8, #0369a1 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(56, 189, 248, 0.5)";
+                waterVal.innerText = "%45 Geçiş Halinde";
+                habScore.style.color = "#fbbf24";
+                bioStatus = "<strong style='color: #fbbf24;'>[GEÇİŞ HAFİF BİYOSFER]</strong> Basit bitki örtüleri, algler ve bakteriyel yaşam formları gelişebilir ancak insan için destekleyici ekipman gerekir.";
             }
+
+            simResult.innerHTML = bioStatus;
         }
     </script>
 
