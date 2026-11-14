@@ -248,3 +248,284 @@
 
         .planet-sphere {
             width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #38bdf8, #0369a1 55%, #020617 90%);
+            box-shadow: 
+                inset -18px -18px 30px rgba(0,0,0,0.85),
+                0 0 28px rgba(56, 189, 248, 0.55);
+            position: relative;
+            transition: all 0.6s ease;
+            animation: floatPlanet 6s ease-in-out infinite;
+        }
+
+        @keyframes floatPlanet {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .planet-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.95rem;
+            z-index: 2;
+        }
+
+        .metric-item span {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Kontroller ve Inputlar */
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        select, input[type="text"] {
+            background: rgba(2, 6, 23, 0.85);
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--magenta);
+            cursor: pointer;
+            margin: 8px 0 14px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            border: 1px solid #38bdf8;
+            padding: 11px 18px;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0369a1, #1d4ed8);
+            box-shadow: 0 0 22px rgba(56, 189, 248, 0.75);
+            transform: translateY(-1px);
+        }
+
+        .output-box {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 3px solid var(--cyan);
+            padding: 12px 14px;
+            margin-top: 15px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            min-height: 85px;
+        }
+
+        .output-box.sim-box {
+            border-left-color: var(--magenta);
+        }
+
+        footer {
+            max-width: 1280px;
+            margin: 25px auto 0 auto;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="nasa-badge">NASA<br>LAB</div>
+            <div>
+                <h1>SPECTRATERRA PROTOCOL</h1>
+                <p class="subtitle">SPHEREx Infrared Sky Survey & Planetary Terraforming Command</p>
+            </div>
+        </div>
+        <div class="telemetry-bar">
+            <div class="status-pill"><span class="pulse-dot"></span> SPHEREx TELEMETRY: ONLINE</div>
+            <div class="status-pill">WAVELENGTH: 0.75 – 5.0 µm</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- MODÜL A: SPECTRASCAN -->
+        <div class="module">
+            <div>
+                <div class="module-header">
+                    <h2 class="mod-a-title">01 // SPECTRASCAN EXPLORER</h2>
+                    <span class="tag tag-observed">Observed Data</span>
+                </div>
+
+                <!-- Canlı Kızılötesi Spektrum Görseli -->
+                <div class="radar-viewport">
+                    <div class="grid-overlay"></div>
+                    <div class="scan-line"></div>
+                    <div class="spectrum-bars" id="spectrumBars">
+                        <div class="bar" style="height: 35px;"></div>
+                        <div class="bar" style="height: 60px;"></div>
+                        <div class="bar" style="height: 45px;"></div>
+                        <div class="bar" style="height: 85px;"></div>
+                        <div class="bar" style="height: 50px;"></div>
+                        <div class="bar" style="height: 75px;"></div>
+                        <div class="bar" style="height: 90px;"></div>
+                        <div class="bar" style="height: 40px;"></div>
+                        <div class="bar" style="height: 65px;"></div>
+                        <div class="bar" style="height: 30px;"></div>
+                    </div>
+                </div>
+
+                <label>Select NASA Exoplanet Candidate or Enter Coordinates:</label>
+                <div class="control-row">
+                    <select id="presetTarget" onchange="loadPreset()">
+                        <option value="TRAPPIST-1e|RA 23h 06m / Dec -05° 02'|40.5 ly|H2O & CO2 Ice Peaks">TRAPPIST-1e (Habitable Zone Candidate)</option>
+                        <option value="TOI-715 b|RA 07h 35m / Dec -73° 34'|137 ly|Dense Silicate & Vapor Signature">TOI-715 b (Super-Earth Target)</option>
+                        <option value="Kepler-186f|RA 19h 54m / Dec +43° 57'|582 ly|Low-Flux Infrared Band">Kepler-186f (Earth-Size Outer Orbit)</option>
+                    </select>
+                </div>
+
+                <label>Sky Coordinates (RA / Dec):</label>
+                <input type="text" id="coords" value="RA 23h 06m / Dec -05° 02'">
+            </div>
+
+            <div>
+                <button onclick="runScan()">INITIATE SPHEREx SPECTRAL SCAN</button>
+                <div class="output-box" id="scanResult">
+                    <strong>[SYSTEM READY]</strong> Select a target sector and initiate infrared spectral analysis.
+                </div>
+            </div>
+        </div>
+
+        <!-- MODÜL B: TERRAPROTOCOL -->
+        <div class="module">
+            <div>
+                <div class="module-header">
+                    <h2 class="mod-b-title">02 // TERRAPROTOCOL CLIMATE LAB</h2>
+                    <span class="tag tag-simulated">User-Simulated</span>
+                </div>
+
+                <!-- Canlı Değişen Gezegen Görselleştirmesi -->
+                <div class="planet-stage">
+                    <div class="grid-overlay"></div>
+                    <div class="planet-sphere" id="planetVisual"></div>
+                    <div class="planet-metrics">
+                        <div class="metric-item">Surface Temp: <span id="tempVal">15</span> °C</div>
+                        <div class="metric-item">Hydrosphere: <span id="waterVal">68% Liquid</span></div>
+                        <div class="metric-item">Habitability: <span id="habScore" style="color: #4ade80;">92 / 100</span></div>
+                        <div><span class="tag tag-estimated">Estimated Model</span></div>
+                    </div>
+                </div>
+
+                <label>Greenhouse Atmosphere Density: <strong id="atmPercent" style="color:#f472b6;">50%</strong></label>
+                <input type="range" id="atmSlider" min="0" max="100" value="50" oninput="updateSim()">
+
+                <div class="output-box sim-box" id="simResult">
+                    <strong>[OPTIMAL EQUILIBRIUM]</strong> Balanced greenhouse effect maintains liquid oceans and stable biosphere conditions.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        SpectraTerra Protocol • NASA Space Apps Challenge 2026 • Data Labels: Observed / Estimated / User-Simulated
+    </footer>
+
+    <script>
+        function loadPreset() {
+            const val = document.getElementById('presetTarget').value.split('|');
+            document.getElementById('coords').value = val[1];
+            runScan();
+        }
+
+        function runScan() {
+            const preset = document.getElementById('presetTarget').value.split('|');
+            const coordVal = document.getElementById('coords').value;
+            const resultBox = document.getElementById('scanResult');
+
+            // Spektrum çubuklarını rastgele dalgalandır
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                const newH = Math.floor(Math.random() * 75) + 20;
+                bar.style.height = newH + 'px';
+            });
+
+            resultBox.innerHTML = `
+                <span style="color: #38bdf8;">[SCAN COMPLETE] Target: <strong>${preset[0]}</strong> (${preset[2]})</span><br>
+                Coordinates: ${coordVal}<br>
+                Spectral Signature: <strong>${preset[3]}</strong> — Sent to TerraProtocol Lab.
+            `;
+        }
+
+        function updateSim() {
+            const sliderVal = parseInt(document.getElementById('atmSlider').value);
+            document.getElementById('atmPercent').innerText = sliderVal + '%';
+
+            const calculatedTemp = Math.round((sliderVal - 50) * 1.6 + 15);
+            document.getElementById('tempVal').innerText = calculatedTemp;
+
+            const planet = document.getElementById('planetVisual');
+            const waterVal = document.getElementById('waterVal');
+            const habScore = document.getElementById('habScore');
+            const simResult = document.getElementById('simResult');
+
+            if (calculatedTemp > 42) {
+                // Aşırı Sıcak / Venüs Benzeri Görünüm
+                planet.style.background = "radial-gradient(circle at 35% 35%, #fb923c, #dc2626 55%, #1e1b4b 90%)";
+                planet.style.boxShadow = "inset -18px -18px 30px rgba(0,0,0,0.85), 0 0 32px rgba(248, 113, 113, 0.75)";
+                waterVal.innerText = "0% (Boiled Off)";
+                habScore.innerText = "12 / 100";
+                habScore.style.color = "#f87171";
+                simResult.innerHTML = "<strong style='color: #f87171;'>[CRITICAL: RUNAWAY GREENHOUSE]</strong> Surface oceans evaporated. Extreme thermal radiation detected.";
+            } else if (calculatedTemp < -8) {
+                // Buzul / Donmuş Gezegen Görünümü
+                planet.style.background = "radial-gradient(circle at 35% 35%, #f8fafc, #93c5fd 55%, #0f172a 90%)";
+                planet.style.boxShadow = "inset -18px -18px 30px rgba(0,0,0,0.85), 0 0 30px rgba(147, 197, 253, 0.7)";
+                waterVal.innerText = "100% Cryo-Ice";
+                habScore.innerText = "28 / 100";
+                habScore.style.color = "#60a5fa";
+                simResult.innerHTML = "<strong style='color: #60a5fa;'>[WARNING: GLOBAL GLACIATION]</strong> Insufficient atmospheric heat retention. Surface locked in ice.";
+            } else {
+                // Yaşanabilir Mavi-Yeşil Dünya Benzeri Görünüm
+                planet.style.background = "radial-gradient(circle at 35% 35%, #34d399, #0284c7 55%, #020617 90%)";
+                planet.style.boxShadow = "inset -18px -18px 30px rgba(0,0,0,0.85), 0 0 32px rgba(52, 211, 153, 0.65)";
+                waterVal.innerText = "68% Liquid Ocean";
+                habScore.innerText = "94 / 100";
+                habScore.style.color = "#4ade80";
+                simResult.innerHTML = "<strong style='color: #4ade80;'>[OPTIMAL EQUILIBRIUM]</strong> Habitable zone achieved! Liquid water and breathable pressure stabilized.";
+            }
+        }
+    </script>
+
+</body>
+</html>
