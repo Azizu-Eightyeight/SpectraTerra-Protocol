@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpectraTerra Protocol | NASA Mission Control</title>
+    <title>SpectraTerra Protocol | NASA Mission Control & Astrobiology Lab</title>
     <style>
         :root {
-            --bg-space: #030712;
-            --panel-bg: rgba(15, 23, 42, 0.9);
-            --border-glow: rgba(56, 189, 248, 0.4);
+            --bg-space: #020617;
+            --panel-bg: rgba(15, 23, 42, 0.92);
+            --border-glow: rgba(56, 189, 248, 0.45);
             --cyan: #38bdf8;
             --magenta: #f472b6;
             --green: #4ade80;
@@ -21,8 +21,11 @@
         body {
             background-color: var(--bg-space);
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(244, 114, 182, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(244, 114, 182, 0.12) 0%, transparent 50%),
+                radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 150px 180px, #38bdf8, rgba(0,0,0,0));
+            background-size: 100% 100%, 100% 100%, 300px 300px, 300px 300px;
             color: #e2e8f0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -30,11 +33,11 @@
             min-height: 100vh;
         }
 
-        /* Giriş Kapak Ekranı */
+        /* Kapak Ekranı */
         #splashScreen {
             position: fixed;
             inset: 0;
-            background: #030712;
+            background: #020617;
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -48,16 +51,16 @@
             background: var(--panel-bg);
             border: 2px solid var(--cyan);
             border-radius: 16px;
-            padding: 40px;
-            max-width: 700px;
-            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+            padding: 45px;
+            max-width: 750px;
+            box-shadow: 0 0 60px rgba(56, 189, 248, 0.35);
         }
 
-        .splash-card h1 { color: #fff; font-size: 2rem; margin-bottom: 10px; }
-        .splash-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 25px; }
+        .splash-card h1 { color: #fff; font-size: 2.2rem; margin-bottom: 15px; letter-spacing: 1px; }
+        .splash-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; }
 
-        /* Ana Uygulama Alanı */
-        #appContainer { display: none; max-width: 1300px; margin: 0 auto; }
+        /* Ana Uygulama */
+        #appContainer { display: none; max-width: 1350px; margin: 0 auto; }
 
         header {
             background: var(--panel-bg);
@@ -69,25 +72,25 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
             margin-bottom: 25px;
         }
 
         .brand { display: flex; align-items: center; gap: 15px; }
 
         .nasa-badge {
-            background: #0284c7;
+            background: linear-gradient(135deg, #0284c7, #1d4ed8);
             border: 2px solid #7dd3fc;
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: white;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
             text-align: center;
             line-height: 1.1;
         }
@@ -95,19 +98,18 @@
         h1 { color: #fff; margin: 0; font-size: 1.5rem; letter-spacing: 1px; }
         .subtitle { color: var(--cyan); margin: 4px 0 0 0; font-size: 0.9rem; }
 
-        /* Sekme / Modül Düzeni */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
             gap: 25px;
         }
 
         .module {
             background: var(--panel-bg);
             border: 1px solid var(--border-glow);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -137,46 +139,93 @@
         .tag-simulated { background: rgba(244, 114, 182, 0.2); color: var(--magenta); border: 1px solid var(--magenta); }
         .tag-estimated { background: rgba(251, 191, 36, 0.2); color: var(--amber); border: 1px solid var(--amber); }
 
-        .visual-box {
-            height: 180px;
+        /* Blink Comparator Görsel Alanı */
+        .blink-viewport {
+            height: 190px;
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .star-field {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(1.5px 1.5px at 40px 60px, #fff, transparent),
+                              radial-gradient(1px 1px at 120px 140px, #94a3b8, transparent),
+                              radial-gradient(2px 2px at 250px 80px, #38bdf8, transparent),
+                              radial-gradient(1px 1px at 380px 150px, #fff, transparent);
+        }
+
+        /* 6 Ay Önce / Sonra Karşılaştırma Çubuğu */
+        .comparator-slider-container {
+            position: relative;
+            width: 80%;
+            height: 40px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 5;
+        }
+
+        .planet-target-dot {
+            position: absolute;
+            right: 35%;
+            top: 45%;
+            width: 10px;
+            height: 10px;
+            background: var(--magenta);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--magenta);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .planet-target-dot:hover { transform: scale(1.8); }
+
+        /* Planet Görsel Alanı */
+        .planet-stage {
+            height: 190px;
             background: #020617;
             border: 1px solid #1e293b;
             border-radius: 8px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            flex-direction: column;
-            gap: 10px;
+            justify-content: space-around;
             padding: 15px;
-        }
-
-        .spectrum-graph {
-            display: flex;
-            align-items: flex-end;
-            gap: 6px;
-            height: 90px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .spec-bar {
-            width: 14px;
-            background: linear-gradient(to top, #0284c7, #38bdf8);
-            border-radius: 3px 3px 0 0;
-            transition: height 0.4s ease;
+            position: relative;
         }
 
         .planet-sphere {
-            width: 95px;
-            height: 95px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #34d399, #0284c7 60%, #020617 90%);
-            box-shadow: inset -12px -12px 20px rgba(0,0,0,0.8), 0 0 20px rgba(52, 211, 153, 0.5);
-            transition: all 0.5s ease;
+            box-shadow: inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(52, 211, 153, 0.5);
+            transition: all 0.6s ease;
         }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 0.85rem;
+            background: rgba(2, 6, 23, 0.8);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+            width: 55%;
+        }
+
+        .metric-item span { font-weight: bold; color: #38bdf8; }
 
         label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 5px; font-weight: 600; }
 
@@ -192,11 +241,19 @@
             outline: none;
         }
 
+        .controls-group {
+            background: rgba(2, 6, 23, 0.5);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+            margin-bottom: 12px;
+        }
+
         input[type="range"] {
             width: 100%;
             accent-color: var(--magenta);
             cursor: pointer;
-            margin: 10px 0 15px 0;
+            margin: 6px 0 10px 0;
         }
 
         button {
@@ -230,89 +287,85 @@
             margin-top: 10px;
             border-radius: 0 6px 6px 0;
             font-size: 0.88rem;
-            line-height: 1.4;
-            min-height: 75px;
+            line-height: 1.45;
+            min-height: 80px;
         }
         .output-box.sim-box { border-left-color: var(--magenta); }
 
-        footer { max-width: 1300px; margin: 25px auto 0 auto; text-align: center; font-size: 0.8rem; color: #64748b; }
+        footer { max-width: 1350px; margin: 25px auto 0 auto; text-align: center; font-size: 0.8rem; color: #64748b; }
     </style>
 </head>
 <body>
 
-    <!-- 1. GİRİŞ (KAPAK) EKRANI -->
+    <!-- GİRİŞ EKRANI -->
     <div id="splashScreen">
         <div class="splash-card">
-            <div style="font-size: 2.5rem; margin-bottom: 15px;">🪐</div>
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🔭</div>
             <h1>SpectraTerra Protokolü</h1>
-            <p><strong>Kızılötesi Gözlemden İklim Mühendisliğine:</strong> İnteraktif Ötegezegen Keşif ve Simülasyon Platformu. NASA SPHEREx teleskop verilerini inceleyin, ötegezegen adayları keşfedin ve terraform deneyleri gerçekleştirin.</p>
-            <button onclick="startMission()" style="font-size: 1.1rem; padding: 15px 30px; width: auto;">İNİTİATE MISSION PROTOCOL // SİSTEMİ BAŞLAT</button>
+            <p><strong>Kızılötesi Gözlemden İklim Mühendisliğine:</strong> NASA SPHEREx teleskobunun 6 aylık gözlem kesitlerini <em>Blink Comparator</em> tekniğiyle tarayın, yeni ötegezegen adayları keşfedin ve çok değişkenli iklim laboratuvarında terraform deneyleri gerçekleştirin.</p>
+            <button onclick="startMission()" style="font-size: 1.1rem; padding: 15px 30px; width: auto;">İNİTİATE MISSION CONTROL // SİSTEMİ BAŞLAT</button>
         </div>
     </div>
 
-    <!-- 2. ANA KONTROL MERKEZİ -->
+    <!-- ANA UYGULAMA -->
     <div id="appContainer">
         <header>
             <div class="brand">
                 <div class="nasa-badge">NASA<br>LAB</div>
                 <div>
                     <h1>SPECTRATERRA PROTOKOLÜ</h1>
-                    <p class="subtitle">SPHEREx Kızılötesi Tarama ve Gezegen Terraformation Simülasyonu</p>
+                    <p class="subtitle">SPHEREx Kızılötesi Sky Survey & Çok Değişkenli İklim Simülasyonu</p>
                 </div>
             </div>
             <div style="display: flex; gap: 10px; font-size: 0.85rem;">
                 <div style="background: #020617; padding: 8px 14px; border: 1px solid #334155; border-radius: 20px; color: #38bdf8;">
-                    ● IRSA FITS: 0237_4D2
+                    ● FITS Pipeline: level2_2025W23
                 </div>
                 <div style="background: #020617; padding: 8px 14px; border: 1px solid #334155; border-radius: 20px; color: #4ade80;">
-                    ● Status: Operational
+                    ● Telemetry: Online
                 </div>
             </div>
         </header>
 
         <div class="grid-layout">
-            <!-- MODÜL A: SPECTRASCAN (Keşif ve FITS Analizi) -->
+            <!-- MODÜL A: SPECTRASCAN (Blink Comparator & Keşif) -->
             <div class="module">
                 <div>
                     <div class="module-header">
-                        <h2 class="mod-a-title">Modül A: SpectraScan (Spektral Keşif)</h2>
-                        <span class="tag tag-observed">Observed Data (FITS)</span>
+                        <h2 class="mod-a-title">Modül A: SpectraScan (Blink Comparator)</h2>
+                        <span class="tag tag-observed">Observed Data (IRSA FITS)</span>
                     </div>
 
-                    <div class="visual-box">
-                        <div class="spectrum-graph" id="specGraph">
-                            <div class="spec-bar" style="height: 35px;"></div>
-                            <div class="spec-bar" style="height: 60px;"></div>
-                            <div class="spec-bar" style="height: 45px;"></div>
-                            <div class="spec-bar" style="height: 85px;"></div>
-                            <div class="spec-bar" style="height: 55px;"></div>
-                            <div class="spec-bar" style="height: 95px;"></div>
-                            <div class="spec-bar" style="height: 50px;"></div>
+                    <!-- Blink Comparator Görsel Alanı -->
+                    <div class="blink-viewport" id="blinkViewport">
+                        <div class="star-field"></div>
+                        <div class="planet-target-dot" title="Şüpheli Ötegezegen Adayı [Tıklayın]" onclick="selectDiscoveredCandidate()"></div>
+                        <div style="position: absolute; bottom: 10px; background: rgba(2,6,23,0.85); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #334155;" id="blinkLabel">
+                            Epoch: 2025-W23 (T2 - Güncel Tarama)
                         </div>
-                        <div style="font-size: 0.75rem; color: #38bdf8;">Active FITS: level2_2025W23_1C_0237_4D2_spx.fits</div>
                     </div>
 
-                    <label>NASA Hedef Ötegezegen / Aday Seçimi:</label>
-                    <select id="targetSelect" onchange="updateTargetInfo()">
-                        <option value="SPHEREx-EXO-0237|RA 19h 25m / Dec +50° 12'|55 ly|Su Buharı ve Silikat">SPHEREx-EXO-0237 (Keşif Adayı - Sector 0237)</option>
-                        <option value="TRAPPIST-1e|RA 23h 06m / Dec -05° 02'|40.5 ly|H2O & CO2 Buz Piki">TRAPPIST-1e (HabitZone Arşiv Hedefi)</option>
-                        <option value="TOI-715 b|RA 07h 35m / Dec -73° 34'|137 ly|Yoğun Silikat Spektrumu">TOI-715 b (Süper-Dünya Adayı)</option>
-                    </select>
+                    <label>Zaman Dilimi Karşılaştırması (Blink Slider):</label>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">T1 (6 Ay Önce)</span>
+                        <input type="range" id="blinkSlider" min="0" max="100" value="100" oninput="toggleBlink(this.value)">
+                        <span style="font-size: 0.8rem; color: #38bdf8;">T2 (Bugün)</span>
+                    </div>
 
-                    <label>Gökyüzü Koordinatları (RA / Dec):</label>
-                    <input type="text" id="coords" value="RA 19h 25m / Dec +50° 12'" readonly>
+                    <label>Seçilen Gözlem Sektörü & FITS Kaynağı:</label>
+                    <input type="text" id="fitsSource" value="level2_2025W23_1C_0237_4D2_spx.fits (Sector 0237)" readonly>
                 </div>
 
                 <div>
-                    <button onclick="runScan()">SPHEREx FITS Verisini Tara ve Analiz Et</button>
+                    <button onclick="runSkyScan()">SPHEREx FITS Verilerini Çözümle</button>
                     <button class="btn-transfer" onclick="transferToLab()">Keşfedilen Adayı TerraProtocol Laboratuvarına Aktar →</button>
                     <div class="output-box" id="scanResult">
-                        <strong>[HAZIR]</strong> Hedef seçildi. Spektral analiz için tarama başlatın.
+                        <strong>[HAZIR]</strong> 6 aylık tarama verileri yüklendi. Mor noktaya tıklayarak veya tarama başlatarak aday keşfedin.
                     </div>
                 </div>
             </div>
 
-            <!-- MODÜL B: TERRAPROTOCOL (İklim Laboratuvarı) -->
+            <!-- MODÜL B: TERRAPROTOCOL (Çok Değişkenli İklim Laboratuvarı) -->
             <div class="module">
                 <div>
                     <div class="module-header">
@@ -320,21 +373,34 @@
                         <span class="tag tag-simulated">User-Simulated</span>
                     </div>
 
-                    <div class="visual-box" style="flex-direction: row; justify-content: space-around;">
+                    <div class="planet-stage">
                         <div class="planet-sphere" id="planetVisual"></div>
-                        <div style="font-size: 0.88rem; text-align: left; display: flex; flex-direction: column; gap: 6px;">
-                            <div>Aktif Hedef: <span id="activeTargetName" style="color:#38bdf8; font-weight:bold;">SPHEREx-EXO-0237</span></div>
-                            <div>Yüzey Sıcaklığı: <span id="tempVal" style="color:#38bdf8; font-weight:bold;">15</span> °C <span class="tag tag-estimated" style="font-size:0.6rem;">Est.</span></div>
-                            <div>Okyanus Durumu: <span id="waterVal" style="color:#4ade80;">%68 Sıvı Su</span></div>
-                            <div>Yaşanabilirlik: <span id="habScore" style="color:#4ade80; font-weight:bold;">94 / 100</span></div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">Sıcaklık: <span id="tempVal">15</span>°C</div>
+                            <div class="metric-item">Basınç: <span id="pressVal">1.0</span> bar</div>
+                            <div class="metric-item">Okyanus: <span id="waterVal">68%</span></div>
+                            <div class="metric-item">Yaşanabilir: <span id="habScore" style="color:#4ade80;">94/100</span></div>
                         </div>
                     </div>
 
-                    <label>Atmosfer Kalınlığı (Sera Faktörü): <strong id="atmPercent" style="color:#f472b6;">50%</strong></label>
-                    <input type="range" id="atmSlider" min="0" max="100" value="50" oninput="updateSim()">
+                    <div class="controls-group">
+                        <label>1. Atmosfer Kalınlığı (Sera Faktörü): <strong id="atmPercent" style="color:#f472b6;">50%</strong></label>
+                        <input type="range" id="atmSlider" min="0" max="100" value="50" oninput="updateSim()">
+
+                        <label>2. Yıldız Uzaklığı (Yörünge Akısı): <strong id="orbitVal" style="color:#38bdf8;">1.00 AU</strong></label>
+                        <input type="range" id="orbitSlider" min="50" max="180" value="100" oninput="updateSim()">
+
+                        <label>3. Yıldız Türü / Radyasyon: 
+                            <select id="starType" onchange="updateSim()" style="margin-top: 4px; padding: 6px;">
+                                <option value="1.0">G-Tip Güneş Benzeri (Standart)</option>
+                                <option value="0.7">K-Tip Turuncu Cüce (Daha Stabil)</option>
+                                <option value="1.3">M-Tip Kırmızı Cüce (Yüksek Flaş Riski)</option>
+                            </select>
+                        </label>
+                    </div>
 
                     <div class="output-box sim-box" id="simResult">
-                        <strong>[İDEAL DENGE]</strong> Kararlı iklim koşulları ve sıvı okyanus formasyonu aktif.
+                        <strong>[İDEAL DENGE]</strong> Aktif aday gezegen sistem parametreleri kararlı. Yaşanabilir bölge korunuyor.
                     </div>
                 </div>
             </div>
@@ -346,80 +412,91 @@
     </footer>
 
     <script>
+        let currentCandidate = "SPHEREx-EXO-0237";
+
         function startMission() {
             document.getElementById('splashScreen').style.display = 'none';
             document.getElementById('appContainer').style.display = 'block';
         }
 
-        function updateTargetInfo() {
-            const val = document.getElementById('targetSelect').value.split('|');
-            document.getElementById('coords').value = val[1];
-            document.getElementById('scanResult').innerHTML = `<strong>[HEDEF SEÇİLDİ]</strong> ${val[0]} (${val[2]}) odaklandı. Spektral analiz bekliyor.`;
+        function toggleBlink(val) {
+            const viewport = document.getElementById('blinkViewport');
+            const label = document.getElementById('blinkLabel');
+            if (val < 50) {
+                viewport.style.filter = "brightness(0.7) contrast(1.2)";
+                label.innerText = "Epoch: 2024-W50 (T1 - 6 Ay Önce)";
+                label.style.color = "#94a3b8";
+            } else {
+                viewport.style.filter = "brightness(1) contrast(1)";
+                label.innerText = "Epoch: 2025-W23 (T2 - Güncel Tarama)";
+                label.style.color = "#38bdf8";
+            }
         }
 
-        function runScan() {
-            const val = document.getElementById('targetSelect').value.split('|');
+        function runSkyScan() {
             const resultBox = document.getElementById('scanResult');
-            
-            // Çubukları dalgalandır
-            const bars = document.querySelectorAll('.spec-bar');
-            bars.forEach(bar => {
-                bar.style.height = (Math.floor(Math.random() * 70) + 30) + 'px';
-            });
-
             resultBox.innerHTML = `
-                <span style="color: #38bdf8;">[BAŞARILI] FITS Taraması Tamamlandı: <code>${val[0]}</code></span><br>
-                Kızılötesi dalga boyunda <strong>${val[3]}</strong> emilim pikleri doğrulandı! Laboratuvara aktarabilirsiniz.
+                <span style="color: #38bdf8;">[FITS ANALİZİ BAŞARILI]</span><br>
+                6 aylık SPHEREx kızılötesi fark görüntüleri (Blink) tarandı. <strong>1 adet şüpheli ötegezegen adayı (SPHEREx-EXO-0237)</strong> hareketli piksel olarak doğrulandı. Laboratuvara aktarın.
+            `;
+        }
+
+        function selectDiscoveredCandidate() {
+            currentCandidate = "SPHEREx-EXO-0237 (Keşfedilen Aday)";
+            document.getElementById('scanResult').innerHTML = `
+                <strong style="color: #4ade80;">[ADAY SEÇİldİ]</strong> <code>${currentCandidate}</code><br>
+                Tayf Analizi: H₂O ve Silikat bulguları pozitif. TerraProtocol'e aktarmaya hazırsınız.
             `;
         }
 
         function transferToLab() {
-            const val = document.getElementById('targetSelect').value.split('|');
-            document.getElementById('activeTargetName').innerText = val[0];
-            
-            // Modül B'ye geçiş animasyonu/vurgusu
             const labBox = document.getElementById('simResult');
-            labBox.innerHTML = `<strong style='color: #4ade80;'>[BAŞARIYLA AKTARILDI]</strong> <code>${val[0]}</code> sisteme yüklendi. Atmosfer kaydırıcısı ile terraform deneyine başlayabilirsiniz!`;
-            
-            // Sayfayı Modül B'ye kaydır (mobil ve küçük ekranlar için)
+            labBox.innerHTML = `<strong style='color: #4ade80;'>[BAŞARIYLA AKTARILDI]</strong> <code>${currentCandidate}</code> iklim laboratuvarına yüklendi. Artık çoklu değişkenleri test edebilirsiniz!`;
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
         function updateSim() {
-            const sliderVal = parseInt(document.getElementById('atmSlider').value);
-            document.getElementById('atmPercent').innerText = sliderVal + '%';
-            const calculatedTemp = Math.round((sliderVal - 50) * 1.6 + 15);
+            const atm = parseInt(document.getElementById('atmSlider').value);
+            const orbit = parseInt(document.getElementById('orbitSlider').value) / 100;
+            const starMult = parseFloat(document.getElementById('starType').value);
+
+            document.getElementById('atmPercent').innerText = atm + '%';
+            document.getElementById('orbitVal').innerText = orbit.toFixed(2) + ' AU';
+
+            // Çok değişkenli termodinamik simülasyon formülü
+            // Sıcaklık = Temel Baz + (Atmosfer etkisi) - (Yörünge uzaklığı etkisi) * Yıldız faktörü
+            let calculatedTemp = Math.round(15 + (atm - 50) * 1.4 - (orbit - 1.0) * 45 * starMult);
+            let calculatedPress = (0.2 + (atm / 25)).toFixed(1);
+            
             document.getElementById('tempVal').innerText = calculatedTemp;
+            document.getElementById('pressVal').innerText = calculatedPress + ' bar';
 
             const planet = document.getElementById('planetVisual');
             const waterVal = document.getElementById('waterVal');
             const habScore = document.getElementById('habScore');
             const simResult = document.getElementById('simResult');
 
-            if (calculatedTemp > 42) {
+            if (calculatedTemp > 45) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #fb923c, #dc2626 60%, #020617 90%)";
-                planet.style.boxShadow = "inset -12px -12px 20px rgba(0,0,0,0.8), 0 0 20px rgba(248, 113, 113, 0.6)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(248, 113, 113, 0.6)";
                 waterVal.innerText = "%0 (Buharlaştı)";
-                waterVal.style.color = "#f87171";
                 habScore.innerText = "12 / 100";
                 habScore.style.color = "#f87171";
-                simResult.innerHTML = "<strong style='color: #f87171;'>[KRİTİK UYARI]</strong> Aşırı sera etkisi! Okyanuslar tamamen buharlaştı.";
-            } else if (calculatedTemp < -8) {
+                simResult.innerHTML = "<strong style='color: #f87171;'>[KRİTİK: SERA KAÇIŞI]</strong> Yüksek atmosfer ve yakın yörünge yüzünden okyanuslar kaynatıIdı, yüzey volkanik cehenneme döndü.";
+            } else if (calculatedTemp < -10) {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #f8fafc, #93c5fd 60%, #020617 90%)";
-                planet.style.boxShadow = "inset -12px -12px 20px rgba(0,0,0,0.8), 0 0 20px rgba(147, 197, 253, 0.6)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(147, 197, 253, 0.6)";
                 waterVal.innerText = "%100 Buzul";
-                waterVal.style.color = "%60a5fa";
-                habScore.innerText = "28 / 100";
+                habScore.innerText = "24 / 100";
                 habScore.style.color = "#60a5fa";
-                simResult.innerHTML = "<strong style='color: #60a5fa;'>[UYARI]</strong> Küresel buzul çağı! Yüzey tamamen buzla kaplandı.";
+                simResult.innerHTML = "<strong style='color: #60a5fa;'>[UYARI: KÜRESEL DONMA]</strong> Yetersiz sera gazı veya yıldızdan uzak yörünge nedeniyle gezegen tamamen buzla kaplandı.";
             } else {
                 planet.style.background = "radial-gradient(circle at 35% 35%, #34d399, #0284c7 60%, #020617 90%)";
-                planet.style.boxShadow = "inset -12px -12px 20px rgba(0,0,0,0.8), 0 0 20px rgba(52, 211, 153, 0.5)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(52, 211, 153, 0.5)";
                 waterVal.innerText = "%68 Sıvı Su";
-                waterVal.style.color = "#4ade80";
-                habScore.innerText = "94 / 100";
+                habScore.innerText = "92 / 100";
                 habScore.style.color = "#4ade80";
-                simResult.innerHTML = "<strong style='color: #4ade80;'>[İDEAL DENGE]</strong> Yaşanabilir bölge! Kararlı sıvı okyanuslar ve ekosistem aktif.";
+                simResult.innerHTML = "<strong style='color: #4ade80;'>[İDEAL HABİTAT]</strong> Yaşanabilir bölge dengeye oturdu! Kararlı sıvı okyanuslar, uygun atmosfer basıncı ve ılıman iklim sağlandı.";
             }
         }
     </script>
