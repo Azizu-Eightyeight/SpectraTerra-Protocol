@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
             min-height: 100vh;
         }
 
-        /* Başlangıç Kapak Ekranı */
+        /* Splash Screen */
         #splashScreen {
             position: fixed;
             inset: 0;
@@ -56,7 +56,7 @@
         .splash-card h1 { color: #fff; font-size: 2.1rem; margin-bottom: 15px; letter-spacing: 1px; }
         .splash-card p { color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; }
 
-        /* Ana Uygulama Paneli */
+        /* Main App Container */
         #appContainer { display: none; max-width: 1400px; margin: 0 auto; }
 
         header {
@@ -135,7 +135,7 @@
         .tag-observed { background: rgba(56, 189, 248, 0.2); color: var(--cyan); border: 1px solid var(--cyan); }
         .tag-simulated { background: rgba(244, 114, 182, 0.2); color: var(--magenta); border: 1px solid var(--magenta); }
 
-        /* Modül A: Blink Ekranı */
+        /* Module A: Blink Viewport */
         .blink-viewport {
             height: 200px;
             background: #020617;
@@ -170,7 +170,7 @@
         }
         .candidate-dot:hover { transform: scale(2); }
 
-        /* Modül B: Laboratuvar */
+        /* Module B: Lab */
         .planet-stage {
             height: 180px;
             background: #020617;
@@ -253,6 +253,8 @@
             box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
             transition: 0.2s;
             margin-bottom: 6px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         button:hover { background: linear-gradient(135deg, #0369a1, #1d4ed8); }
@@ -280,23 +282,23 @@
 </head>
 <body>
 
-    <!-- GİRİŞ EKRANI -->
+    <!-- SPLASH SCREEN -->
     <div id="splashScreen">
         <div class="splash-card">
             <div style="font-size: 2.5rem; margin-bottom: 15px;">🛰️</div>
-            <h1>SpectraTerra Protokolü</h1>
-            <p><strong>NASA SPHEREx IRSA FITS Doğrulamalı Astrobiyoloji Platformu:</strong> Caltech IRSA veritabanından alınan gerçek <code>level2_2025W23_1C_0237_4D2</code> FITS veri seti üzerinden <em>Blink Comparator</em> analizi yapın. Farklı IRSA FITS sektörlerinden seçtiğiniz özel adayları laboratuvara aktararak milimetrik duyarlılıklı çok değişkenli terraform deneyleri gerçekleştirin.</p>
-            <button id="startBtn" type="button" style="font-size: 1.1rem; padding: 14px 28px; width: auto;">INITIATE MISSION CONTROL // BAŞLAT</button>
+            <h1>SpectraTerra Protocol</h1>
+            <p><strong>NASA SPHEREx IRSA FITS Verified Astrobiology Platform:</strong> Analyze real <code>level2_2025W23_1C_0237_4D2</code> FITS dataset via <em>Blink Comparator</em> from Caltech IRSA archive. Transfer verified candidates to the lab and perform high-precision multi-variable terraforming simulations.</p>
+            <button id="startBtn" type="button" style="font-size: 1.1rem; padding: 14px 28px; width: auto;">INITIATE MISSION CONTROL // LAUNCH</button>
         </div>
     </div>
 
-    <!-- ANA UYGULAMA -->
+    <!-- MAIN APP CONTAINER -->
     <div id="appContainer">
         <header>
             <div class="brand">
                 <div class="nasa-badge">NASA<br>LAB</div>
                 <div>
-                    <h1>SPECTRATERRA PROTOKOLÜ</h1>
+                    <h1>SPECTRATERRA PROTOCOL</h1>
                     <p class="subtitle">IRSA SPHEREx FITS Pipeline & Astrobiology Terraforming Lab</p>
                 </div>
             </div>
@@ -311,86 +313,86 @@
         </header>
 
         <div class="grid-layout">
-            <!-- MODÜL A: SPECTRASCAN (Gerçek FITS Sektör Seçimi) -->
+            <!-- MODULE A: SPECTRASCAN -->
             <div class="module">
                 <div>
                     <div class="module-header">
-                        <h2 class="mod-a-title">Modül A: SpectraScan (Blink Karşılaştırıcı)</h2>
+                        <h2 class="mod-a-title">Module A: SpectraScan (Blink Comparator)</h2>
                         <span class="tag tag-observed">Observed Data (IRSA FITS)</span>
                     </div>
 
                     <div class="blink-viewport" id="blinkViewport">
                         <div class="star-field"></div>
-                        <div class="candidate-dot" id="targetDot" style="top: 45%; left: 55%;" title="Sektör 0237 Hedefi"></div>
+                        <div class="candidate-dot" id="targetDot" style="top: 45%; left: 55%;" title="Sector 0237 Target"></div>
                         <div style="position: absolute; bottom: 8px; background: rgba(2,6,23,0.9); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #334155;" id="epochLabel">
-                            FITS Gözlem Sektörü: 0237 (0.75 - 5.0 µm Kızılötesi Bant)
+                            FITS Observation Sector: 0237 (0.75 - 5.0 µm Infrared Band)
                         </div>
                     </div>
 
-                    <label>Blink Kaydırıcı (Epoch T1 Geçmiş ↔ T2 Güncel Gözlem):</label>
+                    <label>Blink Slider (Epoch T1 Past ↔ T2 Current Observation):</label>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span style="font-size: 0.78rem; color: #94a3b8;">T1 (Önce)</span>
+                        <span style="font-size: 0.78rem; color: #94a3b8;">T1 (Past)</span>
                         <input type="range" id="blinkSlider" min="0" max="100" value="100">
-                        <span style="font-size: 0.78rem; color: #38bdf8;">T2 (Bugün)</span>
+                        <span style="font-size: 0.78rem; color: #38bdf8;">T2 (Today)</span>
                     </div>
 
-                    <label>IRSA FITS Veri Sektörü ve Hedef Seçimi:</label>
+                    <label>IRSA FITS Data Sector & Target Selection:</label>
                     <select id="fitsSectorSelect">
-                        <option value="0237|level2_2025W23_1C_0237_4D2_spx.fits|Su Buharı ve Silikat Ağır Çekirdek">Sektör 0237 (SPHEREx-EXO-0237 / Su Odaklı)</option>
-                        <option value="0884|level2_2025W23_1C_0884_5B1_spx.fits|Kaya / Metalik Silikat Profili">Sektör 0884 (SPHEREx-EXO-0884 / Süper-Dünya)</option>
-                        <option value="1402|level2_2025W23_1C_1402_9A8_spx.fits|Düşük Flux / Soğuk Dış Yörünge">Sektör 1402 (SPHEREx-EXO-1402 / Donuk Dünya)</option>
+                        <option value="0237|level2_2025W23_1C_0237_4D2_spx.fits|Water Vapor & Silicate Heavy Core">Sector 0237 (SPHEREx-EXO-0237 / Water-Rich)</option>
+                        <option value="0884|level2_2025W23_1C_0884_5B1_spx.fits|Rocky / Metallic Silicate Profile">Sector 0884 (SPHEREx-EXO-0884 / Super-Earth)</option>
+                        <option value="1402|level2_2025W23_1C_1402_9A8_spx.fits|Low Flux / Cold Outer Orbit">Sector 1402 (SPHEREx-EXO-1402 / Frozen World)</option>
                     </select>
                 </div>
 
                 <div>
-                    <button id="scanBtn" type="button">IRSA SPHEREx FITS Dosyasını Çözümle</button>
-                    <button id="transferBtn" class="btn-transfer" type="button">Seçilen Sektör Verisini Laboratuvara Aktar →</button>
+                    <button id="scanBtn" type="button">Parse IRSA SPHEREx FITS File</button>
+                    <button id="transferBtn" class="btn-transfer" type="button">Transfer Selected Sector to Lab →</button>
                     <div class="output-box" id="scanResult">
-                        <strong>[HAZIR]</strong> Caltech IRSA FITS veri sektörü seçildi. Analiz için butona tıklayın.
+                        <strong>[READY]</strong> Caltech IRSA FITS sector selected. Click to run spectral analysis.
                     </div>
                 </div>
             </div>
 
-            <!-- MODÜL B: TERRAPROTOCOL (Anlık Akışkan Çok Değişkenli Laboratuvar) -->
+            <!-- MODULE B: TERRAPROTOCOL -->
             <div class="module">
                 <div>
                     <div class="module-header">
-                        <h2 class="mod-b-title">Modül B: TerraProtocol (İklim Laboratuvarı)</h2>
+                        <h2 class="mod-b-title">Module B: TerraProtocol (Climate Lab)</h2>
                         <span class="tag tag-simulated">User-Simulated</span>
                     </div>
 
                     <div class="planet-stage">
                         <div class="planet-sphere" id="planetVisual"></div>
                         <div class="metrics-grid">
-                            <div class="metric-item">Sıcaklık: <span id="tempVal">15</span>°C</div>
-                            <div class="metric-item">Basınç: <span id="pressVal">1.0</span> bar</div>
-                            <div class="metric-item">Okyanus: <span id="waterVal">68%</span></div>
-                            <div class="metric-item">Kalkan: <span id="shieldVal">Normal</span></div>
-                            <div class="metric-item" style="grid-column: span 2;">Yaşanabilirlik: <span id="habScore" style="color:#4ade80;">94 / 100</span></div>
+                            <div class="metric-item">Temp: <span id="tempVal">15</span>°C</div>
+                            <div class="metric-item">Pressure: <span id="pressVal">1.0</span> bar</div>
+                            <div class="metric-item">Ocean: <span id="waterVal">68%</span></div>
+                            <div class="metric-item">Shield: <span id="shieldVal">Normal</span></div>
+                            <div class="metric-item" style="grid-column: span 2;">Habitability: <span id="habScore" style="color:#4ade80;">94 / 100</span></div>
                         </div>
                     </div>
 
                     <div class="controls-group">
-                        <label>1. Atmosfer Kalınlığı (Sera Etkisi): <strong id="atmPercent" style="color:#f472b6;">50%</strong></label>
+                        <label>1. Atmospheric Thickness (Greenhouse Factor): <strong id="atmPercent" style="color:#f472b6;">50%</strong></label>
                         <input type="range" id="atmSlider" min="0" max="100" value="50">
 
-                        <label>2. Yıldız Uzaklığı (Yörünge Akısı): <strong id="orbitVal" style="color:#38bdf8;">1.00 AU</strong></label>
+                        <label>2. Stellar Distance (Orbital Flux): <strong id="orbitVal" style="color:#38bdf8;">1.00 AU</strong></label>
                         <input type="range" id="orbitSlider" min="40" max="200" value="100">
 
-                        <label>3. Manyetik Alan Kalkanı (Yıldız Rüzgarı Koruması): <strong id="shieldPercent" style="color:#4ade80;">75%</strong></label>
+                        <label>3. Magnetic Field Shield (Solar Wind Protection): <strong id="shieldPercent" style="color:#4ade80;">75%</strong></label>
                         <input type="range" id="shieldSlider" min="0" max="100" value="75">
 
-                        <label>4. Yıldız Tayf Türü (Radyasyon Kaynağı): 
+                        <label>4. Stellar Spectral Type (Radiation Source): 
                             <select id="starType" style="margin-top: 2px; padding: 4px;">
-                                <option value="1.0">G-Tip Güneş Benzeri (Dengeli / 1.0x)</option>
-                                <option value="0.75">K-Tip Turuncu Cüce (Ilıman / 0.75x)</option>
-                                <option value="1.5">M-Tip Kırmızı Cüce (Yüksek Radyasyon / 1.5x)</option>
+                                <option value="1.0">G-Type Solar-Like (Balanced / 1.0x)</option>
+                                <option value="0.75">K-Type Orange Dwarf (Stable / 0.75x)</option>
+                                <option value="1.5">M-Type Red Dwarf (High Flare Risk / 1.5x)</option>
                             </select>
                         </label>
                     </div>
 
                     <div class="output-box sim-box" id="simResult">
-                        <strong>[CANLI TERMODİNAMİK]</strong> Kaydırıcıların ve yıldız türünün her hareketi anında simüle edilmektedir.
+                        <strong>[LIVE THERMODYNAMICS]</strong> Slider adjustments and stellar type updates are simulated instantly.
                     </div>
                 </div>
             </div>
@@ -409,14 +411,18 @@
             baseTemp: 15
         };
 
-        // Başlat butonu olayı (Garantili event listener)
-        document.getElementById('startBtn').addEventListener('click', function() {
+        // Mobile & Desktop touch/click fix for Launch Button
+        const startBtn = document.getElementById('startBtn');
+        function launchApp(e) {
+            e.preventDefault();
             document.getElementById('splashScreen').style.display = 'none';
             document.getElementById('appContainer').style.display = 'block';
             updateSim();
-        });
+        }
+        startBtn.addEventListener('click', launchApp);
+        startBtn.addEventListener('touchend', launchApp);
 
-        // Blink kaydırıcı
+        // Blink slider
         document.getElementById('blinkSlider').addEventListener('input', function() {
             toggleBlink(this.value);
         });
@@ -426,34 +432,125 @@
             const label = document.getElementById('epochLabel');
             if (val < 50) {
                 viewport.style.filter = "brightness(0.7) contrast(1.2)";
-                label.innerText = `FITS Sektör ${currentSectorData.id}: Epoch T1 (6 Ay Önceki Ham Çerçeve)`;
+                label.innerText = `FITS Sector ${currentSectorData.id}: Epoch T1 (Past Raw Frame)`;
                 label.style.color = "#94a3b8";
             } else {
                 viewport.style.filter = "brightness(1) contrast(1)";
-                label.innerText = `FITS Sektör ${currentSectorData.id}: Epoch T2 (Güncel Kalibre Edilmiş Sinyal)`;
+                label.innerText = `FITS Sector ${currentSectorData.id}: Epoch T2 (Current Calibrated Signal)`;
                 label.style.color = "#38bdf8";
             }
         }
 
-        // Sektör seçimi değişimi
+        // Sector dropdown change
         document.getElementById('fitsSectorSelect').addEventListener('change', function() {
             const val = this.value.split('|');
             currentSectorData.id = val[0];
             currentSectorData.file = val[1];
-            currentSectorData.name = `SPHEREx-EXO-${val[0]}`;  if(val[0] === "0884") currentSectorData.baseTemp = 8; else if(val[0] === "1402") currentSectorData.baseTemp = -20; else currentSectorData.baseTemp = 15;  document.getElementById('scanResult').innerHTML = `<strong>[SEKTÖR DEĞİŞTİRİLDİ]</strong> Sektör ${val[0]} seçildi. Dosya: <code>${val[1]}</code>. Özellik: ${val[2]}.`;
+            currentSectorData.name = `SPHEREx-EXO-${val[0]}`;
+            
+            if(val[0] === "0884") currentSectorData.baseTemp = 8;
+            else if(val[0] === "1402") currentSectorData.baseTemp = -20;
+            else currentSectorData.baseTemp = 15;
+
+            document.getElementById('scanResult').innerHTML = `<strong>[SECTOR UPDATED]</strong> Sector ${val[0]} selected. File: <code>${val[1]}</code>. Profile: ${val[2]}.`;
             toggleBlink(100);
             updateSim();
         });
 
-        // Haritadaki noktaya tıklama
+        // Map target dot click
         document.getElementById('targetDot').addEventListener('click', function() {
             document.getElementById('scanResult').innerHTML = `
-                <strong style="color: #4ade80;">[FITS HEDEFİ DOĞRULANDI]</strong> Sektör ${currentSectorData.id} üzerinde ötegezegen ışık eğrisi anomalisi onaylandı.
+                <strong style="color: #4ade80;">[FITS TARGET VERIFIED]</strong> Exoplanet light curve anomaly confirmed on Sector ${currentSectorData.id}.
             `;
         });
 
-        // Tarama butonu
+        // Scan button
         document.getElementById('scanBtn').addEventListener('click', function() {
             document.getElementById('scanResult').innerHTML = `
-                <span style="color: #38bdf8;">[FITS ÇÖZÜMLEMESİ BAŞARILI]</span><br>
-                <code>${currentSectorData.file}</code> dosyası okundu. Kızıl
+                <span style="color: #38bdf8;">[FITS PARSING SUCCESSFUL]</span><br>
+                <code>${currentSectorData.file}</code> parsed. Infrared spectral peaks & orbital period transferred to lab.
+            `;
+        });
+
+        // Transfer button
+        document.getElementById('transferBtn').addEventListener('click', function() {
+            const labBox = document.getElementById('simResult');
+            labBox.innerHTML = `<strong style='color: #4ade80;'>[TRANSFERRED TO LAB]</strong> <code>${currentSectorData.name}</code> (${currentSectorData.file}) loaded with baseline parameters!`;
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            updateSim();
+        });
+
+        // Lab listeners
+        document.getElementById('atmSlider').addEventListener('input', updateSim);
+        document.getElementById('orbitSlider').addEventListener('input', updateSim);
+        document.getElementById('shieldSlider').addEventListener('input', updateSim);
+        document.getElementById('starType').addEventListener('change', updateSim);
+
+        function updateSim() {
+            const atm = parseInt(document.getElementById('atmSlider').value);
+            const orbit = parseInt(document.getElementById('orbitSlider').value) / 100;
+            const shield = parseInt(document.getElementById('shieldSlider').value);
+            const starMult = parseFloat(document.getElementById('starType').value);
+
+            document.getElementById('atmPercent').innerText = atm + '%';
+            document.getElementById('orbitVal').innerText = orbit.toFixed(2) + ' AU';
+            document.getElementById('shieldPercent').innerText = shield + '%';
+
+            let starHeatOffset = (starMult - 1.0) * 35; 
+            let calculatedTemp = Math.round(currentSectorData.baseTemp + starHeatOffset + (atm - 50) * 1.4 - ((orbit - 1.0) * 55 * starMult));
+            let calculatedPress = Math.max(0.05, (0.2 + (atm / 22) * (shield / 75))).toFixed(1);
+            let shieldStatus = shield > 65 ? "Strong (Active)" : (shield > 30 ? "Moderate" : "Critically Weak");
+
+            document.getElementById('tempVal').innerText = calculatedTemp;
+            document.getElementById('pressVal').innerText = calculatedPress + ' bar';
+            document.getElementById('shieldVal').innerText = shieldStatus;
+
+            const planet = document.getElementById('planetVisual');
+            const waterVal = document.getElementById('waterVal');
+            const habScore = document.getElementById('habScore');
+            const simResult = document.getElementById('simResult');
+
+            let score = 100 - Math.abs(calculatedTemp - 18) * 1.6 - Math.abs(orbit - 1.0) * 20 - Math.max(0, (50 - shield)) - (starMult > 1.2 ? 15 : 0);
+            if (calculatedPress < 0.3) score -= 25;
+            score = Math.max(0, Math.min(100, Math.round(score)));
+            habScore.innerText = score + " / 100";
+
+            let bioStatus = "";
+            if (shield < 25 && starMult > 1.2) {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #78716c, #292524 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(168, 162, 158, 0.4)";
+                waterVal.innerText = "0% (Stripped)";
+                habScore.style.color = "#f87171";
+                bioStatus = "<strong style='color: #f87171;'>[STERILE / ATMOSPHERE STRIPPED]</strong> M-type high radiation star & weak shield stripped away atmosphere. Life impossible.";
+            } else if (calculatedTemp > 42) {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #fb923c, #b91c1c 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(248, 113, 113, 0.6)";
+                waterVal.innerText = "0% (Boiled)";
+                habScore.style.color = "#f87171";
+                bioStatus = "<strong style='color: #f87171;'>[EXTREME HEAT / THERMOPHILES]</strong> Intense stellar flux & greenhouse effect! Toxic environment, only hyperthermophilic microbes survive.";
+            } else if (calculatedTemp < -10) {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #f8fafc, #60a5fa 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(96, 165, 250, 0.6)";
+                waterVal.innerText = "100% Cryo-Ice";
+                habScore.style.color = "#60a5fa";
+                bioStatus = "<strong style='color: #60a5fa;'>[PSYCHROPHILIC / ICE MICROBIOME]</strong> Surface completely frozen. Only subsurface ocean cryptobiotic micro-life forms possible.";
+            } else if (score > 75) {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #34d399, #0284c7 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(52, 211, 153, 0.6)";
+                waterVal.innerText = "68% Liquid Water";
+                habScore.style.color = "#4ade80";
+                bioStatus = "<strong style='color: #4ade80;'>[COMPLEX LIFE & HUMAN COMPATIBLE]</strong> Ideal stellar distance, stable liquid oceans, active shield & temperate climate! Perfect for colonization.";
+            } else {
+                planet.style.background = "radial-gradient(circle at 35% 35%, #38bdf8, #0369a1 60%, #020617 90%)";
+                planet.style.boxShadow = "inset -15px -15px 25px rgba(0,0,0,0.85), 0 0 25px rgba(56, 189, 248, 0.5)";
+                waterVal.innerText = "45% Transitioning";
+                habScore.style.color = "#fbbf24";
+                bioStatus = "<strong style='color: #fbbf24;'>[TRANSITIONAL BIOSPHERE]</strong> Simple flora, algae, and bacterial life forms can evolve; requires artificial support for human habitation.";
+            }
+
+            simResult.innerHTML = bioStatus;
+        }
+    </script>
+
+</body>
+</html>
